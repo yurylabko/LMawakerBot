@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "LMawakerBot"
+version = "0.1.0"
+description = ""
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^2.22.1"
+environs = "^9.5.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^5.0.4"
+black = {version = "^22.6.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 120
