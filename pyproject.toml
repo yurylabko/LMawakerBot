@@ -2,11 +2,13 @@
 name = "LMawakerBot"
 version = "0.1.0"
 description = ""
+authors = ["yurylabko <yuryLabko@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 aiogram = "^2.22.1"
 environs = "^9.5.0"
+aioredis = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

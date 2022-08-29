@@ -1,9 +1,13 @@
 import asyncio
 import logging
+
 from lmawakerbot.config import load_config
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
+
+from lmawakerbot.handlers.echo import register_echo
+from lmawakerbot.handlers.wakeup import register_wakeUp
 
 logger = logging.getLogger()
 
@@ -21,6 +25,9 @@ async def main():
     storange = RedisStorage2() if config.use_redis else MemoryStorage()
     dp = Dispatcher(bot=bot, storage=storange)
 
+    register_wakeUp(dp)
+    register_echo(dp)
+
     try:
         await dp.start_polling()
     finally:
@@ -31,6 +38,5 @@ async def main():
 if __name__ == "__main__":
     try:
         asyncio.run(main())
-        logger.error("Bot stopped!!!")
     except (KeyboardInterrupt, SystemExit):
         logger.error("Bot stopped!!!")
