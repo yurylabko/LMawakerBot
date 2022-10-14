@@ -277,6 +277,14 @@ optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
+name = "phonenumbers"
+version = "8.12.55"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "platformdirs"
 version = "2.5.2"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -414,7 +422,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "5e67b573442cf0e741e5fb9230ff5d247d920cd0e50ffd45e7ddbdd555be2bb5"
+content-hash = "b450267c3905a5577a357bd17653dd5dfb3ec0922398f467ca6f660211fcb4f3"
 
 [metadata.files]
 aiogram = [
@@ -716,6 +724,10 @@ packaging = [
 pathspec = [
     {file = "pathspec-0.9.0-py2.py3-none-any.whl", hash = "sha256:7d15c4ddb0b5c802d161efc417ec1a2558ea2653c2e8ad9c19098201dc1c993a"},
     {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},
+]
+phonenumbers = [
+    {file = "phonenumbers-8.12.55-py2.py3-none-any.whl", hash = "sha256:d3004ea794f607c47a4d111c0131153e8382fe7170fa1275b8c46f2b08c8e570"},
+    {file = "phonenumbers-8.12.55.tar.gz", hash = "sha256:1be3c7353e9325ddeaa909ab17936423c62958d5700d68e5da5be9503c46d087"},
 ]
 platformdirs = [
     {file = "platformdirs-2.5.2-py3-none-any.whl", hash = "sha256:027d8e83a2d7de06bbac4e5ef7e023c02b863d7ea5d079477e722bb41ab25788"},

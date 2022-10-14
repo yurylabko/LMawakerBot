@@ -63,3 +63,4 @@ venv.bak/
 .pyre/
 .idea/*
 .env
+data/
