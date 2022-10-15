@@ -76,7 +76,7 @@ async def try_wakeUp(query: types.CallbackQuery, state: FSMContext):
     while i < 5:
         await query.bot.send_message(
             user_id,
-            f"Ахтунг!!!. Тебя очень хотят видеть в группе {reg.chat.name}",
+            f"ВНИМАНИЕ!!!. Тебя очень хотят видеть в группе {reg.chat.name}",
             reply_markup=kb_cancel_waleUp if i < 4 else types.ReplyKeyboardRemove(),
         )
         await asyncio.sleep(30)

@@ -18,6 +18,7 @@ class Config:
     tg_bot: TgBot
     misc: Miscellaneuos
     use_redis: bool
+    pg_url: str
 
 
 def load_config(path: str = None):
@@ -30,4 +31,5 @@ def load_config(path: str = None):
         ),
         misc=Miscellaneuos(),
         use_redis=env.bool("USE_REDIS"),
+        pg_url=env.str("DATABASE_URL"),
     )

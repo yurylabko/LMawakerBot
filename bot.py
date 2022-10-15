@@ -9,7 +9,9 @@ from aiogram.contrib.fsm_storage.redis import RedisStorage2
 from lmawakerbot.handlers.wakeup import register_wakeUp
 from lmawakerbot.handlers.user import register_user
 from lmawakerbot.middlewares.throttling import ThrottlingMiddlewares
-from lmawakerbot.utils.db_api.sqlite import Database
+
+# from lmawakerbot.utils.db_api.sqlite import Database
+from lmawakerbot.utils.db_api.pgsql import PGDatabase
 
 logger = logging.getLogger()
 
@@ -27,7 +29,8 @@ async def main():
 
     config = load_config()
 
-    db = Database("lmawakerbot/data/main.db")
+    # db = Database("lmawakerbot/data/main.db")
+    db = PGDatabase(config.pg_url)
 
     bot = Bot(token=config.tg_bot.token, parse_mode="HTML")
     storange = RedisStorage2() if config.use_redis else MemoryStorage()

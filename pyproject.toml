@@ -10,6 +10,7 @@ aiogram = "^2.22.1"
 environs = "^9.5.0"
 aioredis = "^2.0.1"
 phonenumbers = "^8.12.55"
+psycopg2-binary = "^2.9.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
