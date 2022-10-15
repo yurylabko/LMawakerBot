@@ -241,7 +241,7 @@ def register_user(dp: Dispatcher):
 
     dp.register_message_handler(show_registration_detail, lambda message: message.text.startswith("/show") and len(message.text) > 5)
     dp.register_message_handler(show_registrations, commands=["show"])
-    dp.register_message_handler(start_user_reg, commands=["reg"])
+    dp.register_message_handler(start_user_reg, commands=["reg", "start"])
     dp.register_message_handler(reset_user_reg, commands=["reset"])
     # dp.register_message_handler(set_user_name, Text(equals=ANSWER_YES, ignore_case=True), state=StateReg.start)
     dp.register_callback_query_handler(req_user_name, lambda c: c.data == "start_reg", state=StateReg.start)
