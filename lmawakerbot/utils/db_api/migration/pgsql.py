@@ -34,15 +34,14 @@ def update_database(db: PGDatabase):
             db.execute("insert into version(num, description) values(%s, %s)", params=(db_version, db_description), commit=True)
             logging.info(f"Update DB schema: #{db_version} done!")
 
-        # if db_version <= 1:
-        #     db.execute(
-        #         "create table if not exists link_user2chat(user_id int not null, chat_id int primary key, "
-        #         "is_active int, create_at int, update_at int);"
-        #     )
-        #     db_version = 2
-        #     db_description = "second init"
-        #     db.execute(f"insert into version(num, description) values(%s, %s)", params=(db_version, db_description))
-        #     logging.info(f"Update DB schema: #{db_version} done!")
+        if db_version <= 1:
+            db.execute("alter table chats alter COLUMN id type bigint;", commit=True)
+            db.execute("alter table users alter COLUMN chat_id type bigint;", commit=True)
+            db.execute("alter table users alter COLUMN id type bigint;", commit=True)
+            db_version = 2
+            db_description = "change ids type"
+            db.execute("insert into version(num, description) values(%s, %s)", params=(db_version, db_description), commit=True)
+            logging.info(f"Update DB schema: #{db_version} done!")
         else:
             logging.info("Update DB schema: no update required")
     except Exception as ex:
