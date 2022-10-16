@@ -217,7 +217,7 @@ class PGDatabase:
         sql_alias = """
         SELECT c.id as chat_id, c.name as chat_name, u.id as user_id, u.name as user_name, u.alias, u.phone_number, u.messengers
           FROM chats c inner join users u on c.id = u.chat_id
-         where c.id = %s and u.alias like %s
+         where c.id = %s and u.alias || ',' || u.name ilike %s
         """
         if name:
             rows = self.execute(

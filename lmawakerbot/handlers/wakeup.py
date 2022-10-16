@@ -95,7 +95,7 @@ async def cancel_wakeUp(message: types.Message, state: FSMContext):
 
 
 def register_wakeUp(dp: Dispatcher):
-    dp.register_message_handler(bot_wakeUp, ChatTypeFilter([types.ChatType.SUPERGROUP, types.ChatType.GROUP]), commands=["wakeUp"])
+    dp.register_message_handler(bot_wakeUp, ChatTypeFilter([types.ChatType.SUPERGROUP, types.ChatType.GROUP]), commands=["wakeUp", "up"])
     dp.register_callback_query_handler(try_wakeUp, lambda c: c.data.startswith("wakeUp"))
     dp.register_message_handler(
         cancel_wakeUp, ChatTypeFilter([types.ChatType.PRIVATE]), lambda message: message.text == "❌ Заткнись", state=WakeUp.start

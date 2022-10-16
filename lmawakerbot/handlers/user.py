@@ -93,14 +93,7 @@ async def req_user_alias(message: types.Message):
 
 async def set_user_alias(message: types.Message, state: FSMContext):
     msg_data = message.text
-    alias = msg_data.split(",")
-
-    invalid_user_names = [n for n in alias if not User.is_valid_name(n)]
-
-    if invalid_user_names and alias:
-        await message.answer(f"Вы ввели некорректные имена: {','.join(invalid_user_names)}, попробуйте еще раз")
-        await req_user_alias(message=message)
-        return
+    alias = [name.strip() for name in msg_data.split(",")]
     data = await state.get_data()
     data["user"]["alias"] = alias
     await state.update_data(data)
