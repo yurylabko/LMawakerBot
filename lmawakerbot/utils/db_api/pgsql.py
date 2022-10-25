@@ -6,21 +6,31 @@ from typing import List, Tuple
 from psycopg2 import extras
 
 from ...types.classes import Chat, Registration
+from .migration.pgsql import update_database
 
 
 class PGDatabase:
     def __init__(self, URL: str = "main.db") -> None:
         self.__url = URL
-        from .migration.pgsql import update_database
+        self.__connection = None
 
         update_database(self)
 
     @property
     def connection(self):
-        return psycopg2.connect(self.__url, sslmode="prefer")
+        if not self.__connection or self.__connection.closed:
+            self.__connection = psycopg2.connect(self.__url, sslmode="prefer")
+        return self.__connection
 
     def execute(
-        self, sql: str, params: Tuple = None, commit: bool = False, fetchall: bool = False, fetchone: bool = False, is_Row: bool = False
+        self,
+        sql: str,
+        params: Tuple = None,
+        commit: bool = False,
+        fetchall: bool = False,
+        fetchone: bool = False,
+        is_Row: bool = False,
+        no_close: bool = False,
     ) -> list:
         if not params:
             params = ()
@@ -43,7 +53,8 @@ class PGDatabase:
         elif fetchone:
             data = cursor.fetchone()
 
-        connection.close()
+        if not no_close:
+            connection.close()
         return data
 
     def add_or_update_chat(self, chat: Chat):
@@ -218,6 +229,7 @@ class PGDatabase:
         SELECT c.id as chat_id, c.name as chat_name, u.id as user_id, u.name as user_name, u.alias, u.phone_number, u.messengers
           FROM chats c inner join users u on c.id = u.chat_id
          where c.id = %s and u.alias || ',' || u.name ilike %s
+         ESCAPE '='
         """
         if name:
             rows = self.execute(
@@ -230,6 +242,7 @@ class PGDatabase:
                 is_Row=True,
             )
         else:
+            alias = alias.replace("=", "==").replace("%", "=%").replace("_", "=_")
             rows = self.execute(
                 sql_alias,
                 (
